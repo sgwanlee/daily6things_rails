@@ -3,6 +3,29 @@ $('#task_errors').remove()
 <% if @result == :success %>
   $('input#task_name').val("");
   $('#tasks').append('<%= j render(@task) %>');
+
+  // move task according to priority
+  $("#tasks>form").each(function(){
+    if ($(this).children('input#task_complete:checked').length > 0) {
+
+      $('#edit_task_<%= @task.id %>').insertBefore($(this));
+      return false;
+    }
+
+    if (parseInt($(this).attr('id').substr(10,2)) == <%= @task.id %>) {
+      return false;
+    }
+
+    var form_task_priority = parseInt($(this).data("priority"));
+    var updated_priority = <%= @task.priority %>;
+
+    if (form_task_priority <= updated_priority) {
+      $('#edit_task_<%= @task.id %>').insertBefore($(this));
+      return false
+    }
+  });
+
+
   $('#edit_task_<%= @task.id %>').submitOnCheck();
 <% else %>
   $('#new_task').append('<%= j render("tasks/error") %>');

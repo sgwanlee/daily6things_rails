@@ -9,12 +9,14 @@
   
   // move task according to priority
   $("#tasks>form").each(function(){
+    //1-incomplete tasks
     if ($(this).children('input#task_complete:checked').length > 0) {
 
       $('#edit_task_<%= @task.id %>').insertBefore($(this));
       return false;
     }
 
+    //2- itself
     if (parseInt($(this).attr('id').substr(10,2)) == <%= @task.id %>) {
       return false;
     }
@@ -22,6 +24,7 @@
     var form_task_priority = parseInt($(this).data("priority"));
     var updated_priority = <%= @task.priority %>;
 
+    //campare priority
     if (form_task_priority <= updated_priority) {
       $('#edit_task_<%= @task.id %>').insertBefore($(this));
       return false

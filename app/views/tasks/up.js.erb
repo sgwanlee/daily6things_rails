@@ -1,5 +1,5 @@
 $('span#task-priority-<%= @task.id %>').text('<%= @task.priority %>');
-
+$('#edit_task_<%= @task.id %>').data("priority", <%= @task.priority %>);
 // append task according to priority
 $("#tasks>form").each(function(){
   if ($(this).children('input#task_complete:checked').length > 0) {
