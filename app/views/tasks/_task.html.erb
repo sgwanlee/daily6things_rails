@@ -1,9 +1,7 @@
 <%= form_for task, remote: true, html: {"data-priority" => task.priority } do |f| %>
   priority : <span class="task-priority" id=<%= "task-priority-#{task.id}" %>><%= "#{task.priority}" %></span>
   <% if not task.complete %>
-    <%= link_to "(up)", task_up_path(task), method: :post, remote: true %>
-    /
-    <%= link_to "(down)", task_down_path(task), method: :post, remote: true %>
+    <%= render partial: 'tasks/up_down', locals: {task: task} %>
   <% end %>
   <%= f.check_box :complete, checked: task.complete ? true : false %>
   <%= f.label :complete, task.name %>
