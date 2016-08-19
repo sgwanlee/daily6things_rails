@@ -1,0 +1,8 @@
+<h4>New task</h4>
+<div id="new_task">
+<%= form_for new_task, remote: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit "Save" %>
+<% end %>
+</div>

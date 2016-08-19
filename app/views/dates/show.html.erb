@@ -1,0 +1,9 @@
+<h1><%= @date %></h1>
+<%= render partial: "tasks/new", locals: {new_task: @task} %>
+
+<h4>Tasks</h4>
+<div id="tasks">
+  <% @tasks.each do |task| %>
+    <%= render task %>
+  <% end %>
+</div>

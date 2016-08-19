@@ -1,0 +1,12 @@
+<%= form_for task, remote: true, html: {"data-priority" => task.priority } do |f| %>
+  priority : <span class="task-priority" id=<%= "task-priority-#{task.id}" %>><%= "#{task.priority}" %></span>
+  <% if not task.complete %>
+    <%= link_to "(up)", task_up_path(task), method: :post, remote: true %>
+    /
+    <%= link_to "(down)", task_down_path(task), method: :post, remote: true %>
+  <% end %>
+  <%= f.check_box :complete, checked: task.complete ? true : false %>
+  <%= f.label :complete, task.name %>
+  <%= f.submit "Update" %>
+  <%= link_to "(x)", task, method: :delete, remote: true %>
+<% end %>

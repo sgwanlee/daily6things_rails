@@ -1,0 +1,15 @@
+$('span#task-priority-<%= @task.id %>').text('<%= @task.priority %>');
+
+// append task according to priority
+$("#tasks>form").each(function(){
+  if ($(this).children('input#task_complete:checked').length > 0) {
+    return false;
+  }
+
+  var form_task_priority = parseInt($(this).data("priority"))
+  var updated_priority = <%= @task.priority %>;
+
+  if (form_task_priority > updated_priority) {
+    $('#edit_task_<%= @task.id %>').insertAfter($(this));
+  }
+});

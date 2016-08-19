@@ -1,0 +1,10 @@
+$('#task_errors').remove()
+
+<% if @result == :success %>
+  $('input#task_name').val("");
+  $('#tasks').append('<%= j render(@task) %>');
+<% else %>
+  $('#new_task').append('<%= j render("tasks/error") %>');
+<% end %>
+
+$('.edit_task input[type=submit]').remove();
