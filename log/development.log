@@ -15240,3 +15240,5 @@ Processing by TasksController#create as JS
   Rendered tasks/_task.html.erb (2.6ms)
   Rendered tasks/create.js.erb (4.3ms)
 Completed 200 OK in 20ms (Views: 8.8ms | ActiveRecord: 8.8ms)
+  [1m[36mTask Load (0.8ms)[0m  [1mSELECT  "tasks".* FROM "tasks"  ORDER BY "tasks"."id" ASC LIMIT 1[0m
+  [1m[35mTask Load (0.6ms)[0m  SELECT  "tasks".* FROM "tasks"  ORDER BY "tasks"."id" ASC LIMIT 1
