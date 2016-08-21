@@ -16,6 +16,13 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     @task.update_attributes!(task_params)
+    if @task.reload.complete == true
+      @task.completed_at = Time.zone.now
+    else
+      @task.completed_at = nil
+    end
+    @task.save
+
     respond_to do |format|
       format.js
     end
@@ -49,6 +56,6 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:name, :complete, :priority)
+    params.require(:task).permit(:name, :complete, :priority, :completed_at)
   end
 end

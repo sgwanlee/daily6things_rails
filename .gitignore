@@ -16,3 +16,6 @@ log/*
 
 # Ignore uploaded test images.
 /public/uploads
+
+# Ignore byebug history
+.byebug_history

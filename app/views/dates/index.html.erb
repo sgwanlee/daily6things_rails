@@ -12,7 +12,7 @@
     <p>Done</p>
     <div id="today-completed-tasks">
       <% @completed_tasks.each do |task| %>
-        <%= render task %>
+        <%= render partial: "tasks/completed", locals: {task: task} %>
       <% end %>
     </div>
   </div>
