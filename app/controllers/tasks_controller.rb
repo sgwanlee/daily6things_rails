@@ -21,7 +21,7 @@ class TasksController < ApplicationController
     else
       @task.completed_at = nil
     end
-    @task.save
+    @task.save!
 
     respond_to do |format|
       format.js
