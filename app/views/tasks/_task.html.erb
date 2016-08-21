@@ -1,5 +1,5 @@
 <%= form_for task, remote: true, html: {"data-priority" => task.priority } do |f| %>
-  priority : <span class="task-priority" id=<%= "task-priority-#{task.id}" %>><%= "#{task.priority}" %></span>
+  <span class="task-priority" id=<%= "task-priority-#{task.id}" %>><%= "#{task.priority}" %></span>
   <% if not task.complete %>
     <%= render partial: 'tasks/up_down', locals: {task: task} %>
   <% end %>
