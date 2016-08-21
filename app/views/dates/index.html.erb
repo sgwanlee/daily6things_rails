@@ -1,8 +1,4 @@
-<%= link_to '<span>show_all</span>'.html_safe, dates_path, class: "pull-right" %>
-<div class="content-section">
-  <%= render partial: "tasks/new", locals: {new_task: @task} %>
-</div>
-
+<%= link_to '<span class="glyphicon glyphicon-chevron-left"></span><span>back</span>'.html_safe, root_path, class: "navigator" %>
 <div class="row">
   <div class="col-md-6">
     <p>To-do</p>
@@ -15,7 +11,7 @@
   <div class="col-md-6">
     <p>Done</p>
     <div id="today-completed-tasks">
-      <% @today_completed_tasks.each do |task| %>
+      <% @completed_tasks.each do |task| %>
         <%= render task %>
       <% end %>
     </div>

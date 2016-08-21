@@ -1,4 +1,9 @@
 class DatesController < ApplicationController
+  def index
+    @incompleted_tasks = Task.uncompleted
+    @completed_tasks = Task.completed
+  end
+
   def show
     @date = Time.zone.now.strftime("%Y-%m-%d")
     @task = Task.new
