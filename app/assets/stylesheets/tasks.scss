@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.content-section {
+  padding-bottom: 30px;
+}
+
 form > input#task_complete:checked + label {
  text-decoration: line-through;
  color: #777;
@@ -14,8 +18,4 @@ form > input#task_complete:checked + label {
   #task_priority {
     max-width: 50px;
   }
-}
-
-.content-section {
-  padding-bottom: 30px;
 }
