@@ -1,0 +1,9 @@
+$("#incompleted-tasks>form").each(function(){
+  var form_task_priority = parseInt($(this).data("priority"));
+  var updated_priority = <%= task.priority %>;
+
+  if (form_task_priority <= updated_priority) {
+    $('#edit_task_<%= task.id %>').insertBefore($(this));
+    return false
+  }
+});

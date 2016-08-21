@@ -5,16 +5,7 @@ $('#edit_task_<%= @task.id %>').remove()
 <% else %>
   $('#incompleted-tasks').append('<%= j render(@task) %>');
 
-  //place in order of priority
-  $("#incompleted-tasks>form").each(function(){
-    var form_task_priority = parseInt($(this).data("priority"));
-    var updated_priority = <%= @task.priority %>;
-
-    if (form_task_priority <= updated_priority) {
-      $('#edit_task_<%= @task.id %>').insertBefore($(this));
-      return false
-    }
-  });
+  <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
 <% end %>
 
 $('#edit_task_<%= @task.id %>').submitOnCheck();

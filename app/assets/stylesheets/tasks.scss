@@ -3,6 +3,19 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 form > input#task_complete:checked + label {
- text-decoration: line-through; 
+ text-decoration: line-through;
  color: #777;
+}
+
+#new_task {
+  #task_name {
+    min-width: 300px;
+  }
+  #task_priority {
+    max-width: 50px;
+  }
+}
+
+.content-section {
+  padding-bottom: 30px;
 }
