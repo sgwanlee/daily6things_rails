@@ -2,8 +2,15 @@
 <%= render partial: "tasks/new", locals: {new_task: @task} %>
 
 <h4>Tasks</h4>
-<div id="tasks">
-  <% @tasks.each do |task| %>
+<p>To-do</p>
+<div id="incompleted-tasks">
+  <% @incompleted_tasks.each do |task| %>
+    <%= render task %>
+  <% end %>
+</div>
+<p>Done</p>
+<div id="today-completed-tasks">
+  <% @today_completed_tasks.each do |task| %>
     <%= render task %>
   <% end %>
 </div>

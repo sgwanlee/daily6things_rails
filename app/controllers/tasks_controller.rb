@@ -2,14 +2,14 @@ class TasksController < ApplicationController
 
   def create
     respond_to do |format|
-      if Task.got_six_tasks?
-        @task = Task.create!(task_params)
-        @result = :success
-        format.js
-      else
-        @result = :failed
-        format.js
-      end
+      format.js {
+        if Task.uncompleted.count < 6
+          @task = Task.create!(task_params)
+          @result = :success
+        else
+          @result = :failed
+        end
+      }
     end
   end
 

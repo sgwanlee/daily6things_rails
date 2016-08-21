@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+4.times do |n|
+  Task.create!(name: "#{n}_today_task")
+end
+
+2.times do |n|
+  t = Task.create(name: "#{n}_yesterday_task")
+  t.created_at = 1.day.ago
+end
