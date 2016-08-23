@@ -1,3 +1,5 @@
+<!-- org code from http://bl.ocks.org/mbostock/4063318 -->
+
 <script type='text/javascript'>
   var width = 960,
       height = 136,
@@ -7,7 +9,7 @@
       format = d3.time.format("%Y-%m-%d");
 
   var color = d3.scale.quantize()
-      .domain([-.05, .05])
+      .domain([0, 1])
       .range(d3.range(11).map(function(d) { return "q" + d + "-11"; }));
 
   var svg = d3.select("#calendar-container").selectAll("svg")
@@ -43,8 +45,7 @@
       .attr("class", "month")
       .attr("d", monthPath);
 
-  
-  // var json = [{Date: "2016-10-01"}, {Date: "2016-10-01"}, {Date: "2016-10-02"}]
+
   var json = <%= @data.html_safe %>
   var data = d3.nest()
               .key(function(d) { return d.Date; })

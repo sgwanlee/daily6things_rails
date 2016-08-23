@@ -3,9 +3,7 @@ class DatesController < ApplicationController
     @incompleted_tasks = Task.uncompleted
     @completed_tasks = Task.completed
     # calendar
-    serialization = ActiveModel::Serializer::TaskSerializer.new(Task.completed, {})
-    @data = serialization.to_json
-    debugger
+    @data = ActiveModel::ArraySerializer.new(Task.completed, each_serializer: TaskSerializer).to_json
   end
 
   def show
