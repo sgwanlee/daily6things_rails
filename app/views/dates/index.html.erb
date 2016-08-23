@@ -1,5 +1,12 @@
 <%= link_to '<span class="glyphicon glyphicon-chevron-left"></span><span>back</span>'.html_safe, root_path, class: "navigator" %>
 <div class="row">
+  <div class="col-md-12">
+    <div id="calendar-container">
+      <%= render partial: "dates/calendar", locals: {data: @data} %>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-6">
     <p>To-do</p>
     <div id="incompleted-tasks">

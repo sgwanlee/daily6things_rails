@@ -11,3 +11,8 @@ form > input#task_complete:checked + label {
     max-width: 50px;
   }
 }
+
+#calendar-container {
+  text-align: center;
+  padding-bottom: 30px;
+}

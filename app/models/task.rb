@@ -18,4 +18,5 @@ class Task < ActiveRecord::Base
     self.update_attributes!(priority: new_priority)
     self
   end
+
 end
