@@ -12,7 +12,7 @@ class DatesController < ApplicationController
     @tasks = Task.uncompleted
 
     @incompleted_tasks = Task.uncompleted
-    @today_completed_tasks = Task.created_today.completed
+    @tasks_completed_today = Task.completed_today
   end
 
 end
