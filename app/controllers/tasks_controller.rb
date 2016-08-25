@@ -15,16 +15,21 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    @task.update_attributes!(task_params)
-    if @task.reload.complete == true
-      @task.completed_at = Time.zone.now
-    else
-      @task.completed_at = nil
-    end
-    @task.save!
 
     respond_to do |format|
-      format.js
+      format.js {
+        if @task.update_attributes(task_params)
+          if @task.reload.complete == true
+            @task.completed_at = Time.zone.now
+          else
+            @task.completed_at = nil
+          end
+          @task.save
+          @result = :success
+        else
+          @result = :failed
+        end
+      }
     end
   end
 
