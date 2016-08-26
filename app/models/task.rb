@@ -23,9 +23,11 @@ class Task < ActiveRecord::Base
   private
 
   def uncompleted_tasks_should_less_than_6
-    if Task.uncompleted.count >= 6
-      errors.add(:already_6_tasks, "already 6 tasks")
-      false
+    if self.complete == false
+      if Task.uncompleted.count >= 6
+        errors.add(:already_6_tasks, "already 6 tasks")
+        false
+      end
     end
   end
 end

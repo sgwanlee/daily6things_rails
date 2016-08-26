@@ -89,13 +89,13 @@ RSpec.describe TasksController, type: :controller do
       end
     end
     context "incompleted tasks == 6" do
-      context "update incompleted" do
-        before(:each) do
+      before(:each) do
           @task = create(:task, complete: true, completed_at: Time.zone.now)
           6.times do 
             task = create(:task)
           end
         end
+      context "update incompleted" do
         it "does not change .complete" do
           expect{
             xhr :patch, :update, id: @task.id, task: { complete: 0}
@@ -105,6 +105,21 @@ RSpec.describe TasksController, type: :controller do
           expect{
             xhr :patch, :update, id: @task.id, task: { complete: 0}
           }.not_to change{@task.reload.completed_at}
+        end
+      end
+      context "update completed" do
+        before(:each) do
+          @task = Task.uncompleted.first
+        end
+        it "changes complete" do
+          expect{
+            xhr :patch, :update, id: @task.id, task: { complete: 1}
+          }.to change{@task.reload.complete}.from(false).to(true)
+        end
+        it "changes completed_at" do
+          expect{
+            xhr :patch, :update, id: @task.id, task: { complete: 1}
+          }.to change{@task.reload.completed_at}.from(nil).to(Time)
         end
       end
     end
