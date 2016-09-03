@@ -1,11 +1,20 @@
-$('#edit_task_<%= @task.id %>').remove()
+<% if @result == :success %>
+  $('#edit_task_<%= @task.id %>').remove()
+  // update task number
+  $('#task-num').text('<%= @uncompleted_tasks_count %>');
+  <% if @task.complete %>
+    $('#today-completed-tasks').append('<%= j render(@task) %>');
+  <% else %>
+    $('#incompleted-tasks').append('<%= j render(@task) %>');
 
-<% if @task.complete %>
-  $('#today-completed-tasks').append('<%= j render(@task) %>');
+    <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
+  <% end %>
+  $('#edit_task_<%= @task.id %>').submitOnCheck();
 <% else %>
-  $('#incompleted-tasks').append('<%= j render(@task) %>');
-
-  <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
+  if ( $('.alert').length > 0) {
+    $('.alert').remove();
+  }
+  $('header').append('<%= j render("layouts/flash") %>');
+  $('#edit_task_<%= @task.id %> input#task_complete').prop( "checked", true );
 <% end %>
 
-$('#edit_task_<%= @task.id %>').submitOnCheck();

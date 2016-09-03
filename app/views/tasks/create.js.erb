@@ -3,11 +3,16 @@ $('#task_errors').remove()
 <% if @result == :success %>
   $('input#task_name').val("");
   $('#incompleted-tasks').append('<%= j render(@task) %>');
+  // update task number
+  $('#task-num').text('<%= @uncompleted_tasks_count %>');
 
   <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
 
   $('#edit_task_<%= @task.id %>').submitOnCheck();
 <% else %>
-  $('#new_task').append('<%= j render("tasks/error") %>');
+  if ( $('.alert').length > 0) {
+    $('.alert').remove();
+  }
+  $('header').append('<%= j render("layouts/flash") %>');
 <% end %>
 

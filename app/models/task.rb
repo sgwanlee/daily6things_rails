@@ -10,13 +10,15 @@ class Task < ActiveRecord::Base
   end
 
   def increase_priority
-    self.update_attributes!(priority: self.priority + 1)
+    self.priority = priority + 1
+    self.save
     self
   end
 
   def decrease_priority
     new_priority = if self.priority == 0 then 0 else self.priority - 1 end
-    self.update_attributes!(priority: new_priority)
+    self.priority = new_priority
+    self.save
     self
   end
 
@@ -25,7 +27,7 @@ class Task < ActiveRecord::Base
   def uncompleted_tasks_should_less_than_6
     if self.complete == false
       if Task.uncompleted.count >= 6
-        errors.add(:already_6_tasks, "already 6 tasks")
+        errors.add(:task_limit, "already 6 tasks")
         false
       end
     end

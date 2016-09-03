@@ -1,1 +1,3 @@
 $('#edit_task_<%= @task.id %>').remove();
+// update task number
+  $('#task-num').text('<%= @uncomplted_tasks_count %>');

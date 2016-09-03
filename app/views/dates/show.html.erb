@@ -5,7 +5,7 @@
 
 <div class="row">
   <div class="col-md-6">
-    <p>To-do</p>
+    <p>To-do (<span id="task-num"><%= @incompleted_tasks.count %></span>/6)</p>
     <div id="incompleted-tasks">
       <% @incompleted_tasks.each do |task| %>
         <%= render task %>

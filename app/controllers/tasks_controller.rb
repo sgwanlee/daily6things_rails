@@ -3,11 +3,14 @@ class TasksController < ApplicationController
   def create
     respond_to do |format|
       format.js {
-        if Task.uncompleted.count < 6
+        @uncompleted_tasks_count = Task.uncompleted.count
+        if @uncompleted_tasks_count < 6
           @task = Task.create!(task_params)
+          @uncompleted_tasks_count += 1
           @result = :success
         else
           @result = :failed
+          flash[:danger] = "You've already got 6 tasks today"
         end
       }
     end
@@ -27,14 +30,17 @@ class TasksController < ApplicationController
           @task.save
           @result = :success
         else
-          @result = :failed
+          @result = :fail
+          flash[:danger] = "You've already got 6 tasks today"
         end
+        @uncompleted_tasks_count = Task.uncompleted.count
       }
     end
   end
 
   def destroy
     @task = Task.destroy(params[:id])
+    @uncomplted_tasks_count = Task.uncompleted.count
     respond_to do |format|
       format.js
     end
