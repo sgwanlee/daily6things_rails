@@ -12,24 +12,27 @@ gem 'bootstrap-sass',       '3.2.0.0'
 gem 'd3_rails'
 gem 'active_model_serializers', '0.9.3'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  gem 'sqlite3'
-  gem 'rspec-rails', '~> 3.5'
+group :development do
+  gem 'web-console', '~> 2.0'
 end
 
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+group :development, :test do
+  gem 'sqlite3',     '>=1.3.9'
+  gem 'byebug',      '3.4.0'
+  gem 'spring',      '1.1.3'
+  gem "rspec-rails", "~> 3.5"
+  gem "factory_girl_rails", "~> 4.4.1"
+  gem "faker", "~> 1.4.3"
 end
 
 group :test do
+  gem "capybara", "~> 2.8.1"
+  gem "database_cleaner", "~> 1.3.0"
+  gem "launchy", "~> 2.4.2"
+  gem "selenium-webdriver", "~> 2.53.4"
   gem 'guard-rspec'
-  gem "factory_girl_rails", "~> 4.0"
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :production do
