@@ -12,11 +12,6 @@ jQuery.fn.submitOnCheck = function() {
   return this;
 }
 
-$(function() {
-  $('.edit_task').submitOnCheck();
-});
-
-
 $(document).on("turbolinks:load", function (){
   $('.edit_task').submitOnCheck();
 });
