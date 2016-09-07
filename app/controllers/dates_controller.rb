@@ -7,7 +7,7 @@ class DatesController < ApplicationController
   end
 
   def show
-    @date = Time.zone.now.strftime("%Y-%m-%d")
+    @date = l(Time.zone.now, format: "%-m월 %e일 %A요일")
     @task = Task.new
     @tasks = Task.uncompleted
 

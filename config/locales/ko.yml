@@ -19,5 +19,6 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+ko:
+  date:
+    day_names: ["일", "월", "화", "수", "목", "금", "토"]
