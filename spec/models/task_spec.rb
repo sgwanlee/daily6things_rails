@@ -36,6 +36,21 @@ RSpec.describe Task, type: :model do
         expect(@task.errors[:task_limit]).to include("already 6 tasks")
       end
     end
+    context "changing priority" do
+      before(:each) do
+        5.times { create(:task) }
+      end
+      it "increases priority by 1" do
+        priority = @task.priority
+        @task.increase_priority.reload
+        expect(@task.priority).to eq(priority + 1)
+      end
+      it 'decreases priority by 1' do
+        priority = @task.priority
+        @task.decrease_priority.reload
+        expect(@task.priority).to eq(if priority == 0 then 0 else priority - 1 end)
+      end
+    end
   end
 
   context "with less than 6 uncompleted tasks" do
