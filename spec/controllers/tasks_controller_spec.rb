@@ -27,30 +27,13 @@ RSpec.describe TasksController, type: :controller do
       end
     end
   end
-  describe "Post up/down" do
-    context "priority > 0" do
-      before(:each) do
-        @task = create(:task, priority: 1)
-      end
-      it "decreases priority" do
-      expect{
-          xhr :post, :down, task_id: @task.id
-        }.to change{@task.reload.priority}.by(-1)
-      end
-      it "increases priority" do
-      expect{
-          xhr :post, :up, task_id: @task.id
-        }.to change{@task.reload.priority}.by(1)
+  describe "Post replace" do
+    context "4th to 1st" do
+      it "changes priorities of uncompleted tasks" do
       end
     end
-    context "priority = 0" do
-      before(:each) do
-        @task = create(:task, priority: 0)
-      end
-      it "doesn't decrease priority" do
-      expect{
-          xhr :post, :down, task_id: @task.id
-        }.not_to change{@task.reload.priority}
+    context "1st to 4th" do
+      it "changes priorities of uncompleted tasks" do
       end
     end
   end

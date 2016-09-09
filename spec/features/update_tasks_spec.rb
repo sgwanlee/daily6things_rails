@@ -8,7 +8,7 @@ feature "update tasks" do
   context "tring to complete a task" do
     scenario "it completes a task", js: true do
       visit root_path
-      find(:css, "form#edit_task_#{@task.id} input#task_complete").set(true)
+      find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(true)
       within("#today-completed-tasks") do
         expect(page).to have_content("Task1")
       end
@@ -25,7 +25,7 @@ feature "update tasks" do
       @task.completed_at = Time.now
       @task.save
       visit root_path
-      find(:css, "form#edit_task_#{@task.id} input#task_complete").set(false)
+      find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(false)
       within("#incompleted-tasks") do
         expect(page).to have_content("Task1")
         # expect(find("form#edit_task_#{@task.id}")).to have_content("Task1")
@@ -38,7 +38,7 @@ feature "update tasks" do
       @task.save
       create(:task)
       visit root_path
-      find(:css, "form#edit_task_#{@task.id} input#task_complete").set(false)
+      find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(false)
 
       expect(page).to have_content("You've already got 6 tasks today")
       expect(page).to have_selector(".alert")
