@@ -22,13 +22,46 @@ class Task < ActiveRecord::Base
     self
   end
 
+  def set_priority_from_index(index)
+    tasks = Task.uncompleted
+    tasks.each_with_index do |task, i|
+      if task == self
+        next
+      end
+
+      if i == index
+        self.priority = task.priority + 1
+        self.save
+      elsif i < index
+        task.priority += 1
+        task.save
+      else
+        task.priority -= 1
+        task.save
+      end
+    end
+  end
+
+  def completed?
+    self.complete == true
+  end
+
   private
 
   def uncompleted_tasks_should_less_than_6
-    if self.complete == false
-      if Task.uncompleted.count >= 6
+    if self.new_record?
+      if not Task.uncompleted.count <= 6
         errors.add(:task_limit, "already 6 tasks")
         false
+      end
+    else
+      if not self.completed?
+        if not Task.uncompleted.pluck(:id).include?(self.id)
+          if not Task.uncompleted.count < 6
+            errors.add(:task_limit, "already 6 tasks")
+            false
+          end
+        end
       end
     end
   end
