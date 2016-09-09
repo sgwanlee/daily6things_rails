@@ -3,18 +3,22 @@
 <head>
   <title>Daily6things</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <link rel="apple-touch-icon" href="/icon.png"/>
   <link rel="shortcut icon" href="/icon.png" />
+  <%= render 'layouts/meta' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1><%= @date %></h1>
-    </header>
     <%= render 'layouts/flash' %>
+    <div id="header-date" class="top-right"><%= @date %></div>
+    <!-- <div id="show-all-link" class="top-left">
+      <%= link_to dates_path do %>
+        <%= fa_icon "archive", text: "All Tasks" %>
+      <% end %>
+    </div> -->
     <%= yield %>
   </div>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

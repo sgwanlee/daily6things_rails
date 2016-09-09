@@ -4,3 +4,15 @@
 .navigator {
   padding-bottom: 30px;
 }
+
+#header-date {
+  padding: 15px 15px 0 0;
+  font-weight: 300;
+  color: $d6-light-gray;
+  // font-size: $lg-font-size;
+}
+
+#show-all-link {
+  padding: 15px 0 0 15px;
+  font-weight: 300;
+}

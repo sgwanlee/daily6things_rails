@@ -1,9 +1,12 @@
-form > input#task_complete:checked + label {
+form > input[type=checkbox]:checked + label {
  text-decoration: line-through;
- color: #777;
+ color: $d6-completed-task;
 }
 
 #new_task {
+  padding-top: 30px;
+  text-align: center;
+
   #task_name {
     min-width: 300px;
   }
@@ -15,4 +18,32 @@ form > input#task_complete:checked + label {
 #calendar-container {
   text-align: center;
   padding-bottom: 30px;
+}
+
+#task_input {
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+  background: 0;
+  border: 0;
+  border-bottom: 3px solid #c5c3c3;
+  color: $d6-task-input;
+  font-weight: 500;
+  outline: 0;
+  text-align: center;
+  font-size: $lg-font-size;
+}
+
+#incompleted-tasks, #today-completed-tasks {
+  font-size: 125%;
+  font-weight: 300;
+}
+
+.delete-link {
+  padding-left: 15px;
+}
+
+.bar-icon {
+  color: $d6-light-gray;
+  padding-right: 15px;
 }

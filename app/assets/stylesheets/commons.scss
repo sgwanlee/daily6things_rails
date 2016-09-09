@@ -1,12 +1,28 @@
-.content-section {
-  padding-bottom: 30px;
+html {
+  height: 100%;
+  color: $d6-text;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: $d6-background-color;
+  height: 100%;
+  color: $d6-text;
 }
 
 a {
-  color: #b1b1b1;
+  color: $d6-light-gray;
 }
 
 a:hover, a:focus {
   text-decoration: none;
 
+}
+
+h3, h4 {
+  font-weight: 300;
+}
+
+label {
+  font-weight: 300;
 }
