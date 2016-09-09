@@ -13,7 +13,12 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+@import "variables";
+@import "layouts";
 @import "dates";
 @import "tasks";
 @import "commons";
 @import "calendar";
+@import "mobile";
+@import "dragula.min";

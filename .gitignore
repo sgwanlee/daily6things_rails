@@ -19,3 +19,5 @@ log/*
 
 # Ignore byebug history
 .byebug_history
+# Added by npm-rails
+/node_modules

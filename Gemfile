@@ -11,6 +11,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'd3_rails'
 gem 'active_model_serializers', '0.9.3'
+gem "font-awesome-rails"
+gem 'npm-rails'
 
 group :development do
   gem 'web-console', '~> 2.0'
