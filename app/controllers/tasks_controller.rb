@@ -65,6 +65,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def replace
+    @task = Task.find(params[:task_id])
+    @task.set_priority_from_index(params[:index].to_i)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
   def task_params
     params.require(:task).permit(:name, :complete, :priority, :completed_at)

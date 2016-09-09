@@ -1,10 +1,13 @@
 <%= form_for task, remote: true, html: {"data-priority" => task.priority } do |f| %>
-  <span class="task-priority" id=<%= "task-priority-#{task.id}" %>><%= "#{task.priority}" %></span>
-  <% if not task.complete %>
-    <%= render partial: 'tasks/up_down', locals: {task: task} %>
+  <% if not task.completed? %>
+    <%= fa_icon "bars", class: "bar-icon" %>
   <% end %>
-  <%= f.check_box :complete, checked: task.complete ? true : false %>
-  <%= f.label :complete, task.name %>
-  <%= f.submit "Update" %>
-  <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, task, method: :delete, remote: true, class: "pull-right delete-link" %>
+  <%= f.check_box "complete-#{task.id}", checked: task.complete ? true : false %>
+  <%= f.label "complete-#{task.id}", task.name %>
+
+  <% if not task.complete %>
+    <%= link_to 'x', task, method: :delete, remote: true, class: "delete-link" %>
+  <% end %>
+  
+  
 <% end %>

@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require d3
+//= require npm-rails/development/npm-dependencies
 //= require_tree .

@@ -6,8 +6,6 @@ $('#task_errors').remove()
   // update task number
   $('#task-num').text('<%= @uncompleted_tasks_count %>');
 
-  <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
-
   $('#edit_task_<%= @task.id %>').submitOnCheck();
 <% else %>
   if ( $('.alert').length > 0) {

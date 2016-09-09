@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :tasks do
     post 'up' => 'tasks#up'
     post 'down' => 'tasks#down'
+    post 'replace' => 'tasks#replace'
   end
 
   # Example of regular route:

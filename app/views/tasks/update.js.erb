@@ -6,9 +6,8 @@
     $('#today-completed-tasks').append('<%= j render(@task) %>');
   <% else %>
     $('#incompleted-tasks').append('<%= j render(@task) %>');
-
-    <%= render(partial: 'tasks/place_in_order', locals: {task: @task}) %>
   <% end %>
+  
   $('#edit_task_<%= @task.id %>').submitOnCheck();
 <% else %>
   if ( $('.alert').length > 0) {
@@ -17,4 +16,3 @@
   $('header').append('<%= j render("layouts/flash") %>');
   $('#edit_task_<%= @task.id %> input#task_complete').prop( "checked", true );
 <% end %>
-
