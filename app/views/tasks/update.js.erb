@@ -13,6 +13,6 @@
   if ( $('.alert').length > 0) {
     $('.alert').remove();
   }
-  $('header').append('<%= j render("layouts/flash") %>');
+  $('#new_task').append('<%= j render("layouts/flash") %>');
   $('#edit_task_<%= @task.id %> input#task_complete').prop( "checked", true );
 <% end %>

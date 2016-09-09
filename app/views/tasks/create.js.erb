@@ -11,6 +11,6 @@ $('#task_errors').remove()
   if ( $('.alert').length > 0) {
     $('.alert').remove();
   }
-  $('header').append('<%= j render("layouts/flash") %>');
+  $('#new_task').append('<%= j render("layouts/flash") %>');
 <% end %>
 
