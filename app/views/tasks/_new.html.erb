@@ -1,10 +1,8 @@
 <div id="new_task">
-<%= form_for new_task, remote: true, html: {class: 'form-inline'} do |f| %>
-  <div class="form-group">
-    <%= f.text_field :name, class: "form-control", placeholder: "What's your important task today?" %>
-    <%= f.label :priority %>
-    <%= f.text_field :priority, class: "form-control" %>
-  </div>
-  <%= f.submit "Save", class: 'btn btn-default' %>
-<% end %>
+  <%= form_for new_task, remote: true, html: {class: 'form-inline'} do |f| %>
+    <div class="form-group">
+      <h3>What's your important task today?</h3>
+      <%= f.text_field :name, id: "task_input", autocomplete: "off"%>
+    </div>
+  <% end %>
 </div>
