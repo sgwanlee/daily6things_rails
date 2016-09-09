@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :change_complete_params, only: [:update]
 
   def create
     respond_to do |format|
@@ -76,5 +77,12 @@ class TasksController < ApplicationController
   private
   def task_params
     params.require(:task).permit(:name, :complete, :priority, :completed_at)
+  end
+
+  def change_complete_params
+    key = params[:task].keys.find { |e| /^complete.*/ =~ e}
+    val = params[:task][key]
+    params[:task].delete(key)
+    params[:task][:complete] = val
   end
 end
