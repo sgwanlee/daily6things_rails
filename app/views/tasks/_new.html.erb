@@ -1,7 +1,7 @@
 <div id="new_task">
   <%= form_for new_task, remote: true, html: {class: 'form-inline'} do |f| %>
     <div class="form-group">
-      <h3>What's your important task today?</h3>
+      <h3><%= t(:question) %></h3>
       <%= f.text_field :name, id: "task_input", autocomplete: "off"%>
     </div>
   <% end %>
