@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   scope :completed, -> {where(complete: true).order(completed_at: :desc)}
   scope :completed_today, -> {where(completed_at: (Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)).order(priority: :desc)}
   validate :uncompleted_tasks_should_less_than_6
+  belongs_to :user
 
   def self.created_today_or_uncompleted
     t = Task.arel_table

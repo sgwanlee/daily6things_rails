@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
       return unless request.xhr?
       flash.discard # don't want the flash to appear when you reload page
     end
+
+    def require_login
+      if not logged_in?
+        flash[:danger] = t(:login_is_needed)
+        redirect_to root_url
+      end
+    end
 end

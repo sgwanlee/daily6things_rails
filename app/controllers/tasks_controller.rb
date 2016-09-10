@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :change_complete_params, only: [:update]
+  before_action :require_login
 
   def create
     respond_to do |format|
@@ -56,6 +57,7 @@ class TasksController < ApplicationController
   end
 
   private
+
   def task_params
     params.require(:task).permit(:name, :complete, :priority, :completed_at)
   end

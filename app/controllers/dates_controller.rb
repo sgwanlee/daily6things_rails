@@ -1,4 +1,6 @@
 class DatesController < ApplicationController
+  before_action :require_login
+
   def index
     @incompleted_tasks = Task.uncompleted
     @completed_tasks = Task.completed
@@ -8,11 +10,10 @@ class DatesController < ApplicationController
 
   def show
     @date = l(Time.zone.now, format: "%-m월%e일(%A)")
-    @task = Task.new
-    @tasks = Task.uncompleted
+    @task = current_user.tasks.new
+    @tasks = current_user.tasks.uncompleted
 
-    @incompleted_tasks = Task.uncompleted
-    @tasks_completed_today = Task.completed_today
+    @incompleted_tasks = current_user.tasks.uncompleted
+    @tasks_completed_today = current_user.tasks.completed_today
   end
-
 end
