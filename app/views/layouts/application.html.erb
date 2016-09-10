@@ -12,13 +12,21 @@
 <body>
   <div id="main_container" class="container">
     <%= render 'layouts/flash' %>
-    <div id="header-date" class="top-right"><%= @date %></div>
+    <% if logged_in? %>
+      <div id="header-date" class="top-right"><%= @date %></div>
+    <% end %>
     <!-- <div id="show-all-link" class="top-left">
       <%= link_to dates_path do %>
         <%= fa_icon "archive", text: "All Tasks" %>
       <% end %>
     </div> -->
     <%= yield %>
+    <% if logged_in? %>
+      <div id="footer-logout" class="bottom-left">
+        <%= link_to "Logout", logout_path, method: :delete %>
+      </div>
+    <% end %>
+    
   </div>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
