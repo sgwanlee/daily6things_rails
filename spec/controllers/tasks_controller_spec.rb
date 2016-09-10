@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
+  before(:each) do
+    @user = create(:user)
+    log_in_as(@user)
+  end
   describe "Post create" do
     context "uncompleted tasks < 6" do
       it "creates new task" do

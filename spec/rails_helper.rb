@@ -27,6 +27,29 @@ require 'capybara/rspec'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+module SessionHelperForFeatureTest
+  # Log in as a particular user.
+  def log_in_as(user, password: 'password')
+    visit login_path
+    fill_in "session[email]", with: user.email
+    fill_in "session[password]", with: password
+    click_button "Log in"
+  end
+end
+
+module SessionHelperForUnitTest
+  # Returns true if a test user is logged in.
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
+  # Log in as a particular user.
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+end
+
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -105,4 +128,7 @@ RSpec.configure do |config|
   config.append_after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include SessionHelperForFeatureTest, type: :feature
+  config.include SessionHelperForUnitTest, type: :controller
 end

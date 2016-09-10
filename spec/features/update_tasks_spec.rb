@@ -2,17 +2,19 @@ require 'rails_helper'
 
 feature "update tasks" do
   before(:each) do
-    5.times { create(:task)}
-    @task = create(:task, name: "Task1")
+    @user = create(:user, password: "ABCDE123", password_confirmation: "ABCDE123")
+    5.times { create(:task, user: @user)}
+    @task = create(:task, name: "Task1", user: @user)
   end
   context "tring to complete a task" do
     scenario "it completes a task", js: true do
-      visit root_path
+      log_in_as(@user, password: "ABCDE123")
+
       find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(true)
       within("#today-completed-tasks") do
         expect(page).to have_content("Task1")
       end
-      visit root_path
+      visit date_path(1)
       within("#today-completed-tasks") do
         expect(page).to have_content("Task1")
       end
@@ -24,7 +26,9 @@ feature "update tasks" do
       @task.complete = true
       @task.completed_at = Time.now
       @task.save
-      visit root_path
+      
+      log_in_as(@user, password: "ABCDE123")
+
       find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(false)
       within("#incompleted-tasks") do
         expect(page).to have_content("Task1")
@@ -36,8 +40,10 @@ feature "update tasks" do
       @task.complete = true
       @task.completed_at = Time.now
       @task.save
-      create(:task)
-      visit root_path
+      create(:task, user: @user)
+
+      log_in_as(@user, password: "ABCDE123")
+
       find(:css, "form#edit_task_#{@task.id} input#task_complete-#{@task.id}").set(false)
 
       expect(page).to have_content("You've already got 6 tasks today")
