@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       redirect_to date_path(1)
     else
       flash.now[:danger] = 'Invalid email/password combination' # Not quite right!
-      render 'static/home'
+      render 'new'
     end
   end
 

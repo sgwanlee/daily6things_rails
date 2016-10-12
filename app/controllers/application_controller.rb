@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     def require_login
       if not logged_in?
         flash[:danger] = t(:login_is_needed)
-        redirect_to root_url
+        redirect_to login_url
       end
     end
 end
