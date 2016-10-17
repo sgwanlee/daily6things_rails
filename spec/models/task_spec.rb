@@ -4,6 +4,7 @@ RSpec.describe Task, type: :model do
 
   before(:each) do
     @task = create(:task, complete: false)
+    @user = @task.user
   end
 
   it "increases priority by 1" do
@@ -30,7 +31,7 @@ RSpec.describe Task, type: :model do
       it "is not valid " do
         @task.complete = true
         @task.save
-        6.times { create(:task)}
+        6.times { create(:task, user_id: @user.id)}
         @task.complete = false
         @task.valid?
         expect(@task.errors[:task_limit]).to include("already 6 tasks")
@@ -38,7 +39,7 @@ RSpec.describe Task, type: :model do
     end
     context "changing priority" do
       before(:each) do
-        5.times { create(:task) }
+        5.times { create(:task, user_id: @user.id) }
       end
       it "increases priority by 1" do
         priority = @task.priority
@@ -60,6 +61,20 @@ RSpec.describe Task, type: :model do
         @task.save
         @task.complete = false
         expect(@task).to be_valid
+      end
+    end
+    context "with 6 uncompleted tasks including other user's tasks" do
+      before(:each) do
+        @other_user = create(:user)
+        4.times { create(:task, user_id: @user.id) }
+        @other_user_task = create(:task, user_id: @other_user.id)
+      end
+      context "adding new task" do
+        it "is valid" do
+          expect(@user.tasks.uncompleted.count).to eq(5)
+          task = build(:task, user_id: @user.id)
+          expect(task).to be_valid
+        end
       end
     end
   end

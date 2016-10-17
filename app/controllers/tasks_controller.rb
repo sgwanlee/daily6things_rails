@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   def create
     respond_to do |format|
       format.js {
-        @uncompleted_tasks_count = Task.uncompleted.count
+        @uncompleted_tasks_count = current_user.tasks.uncompleted.count
         if @uncompleted_tasks_count < 6
           @task = Task.create!(task_params)
           @uncompleted_tasks_count += 1

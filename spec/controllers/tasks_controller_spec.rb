@@ -17,15 +17,12 @@ RSpec.describe TasksController, type: :controller do
     end
     context "uncompleted tasks >= 6" do
       before(:each) do
-        @tasks = create_list(:task, 6)
-      end
-      after(:each) do
-        @tasks.each {|task| task.destroy}
+        6.times { create(:task, user_id: @user.id)}
       end
       it "genereates error message" do
-        expect(Task.uncompleted.count).to eq(6)
+        expect(@user.tasks.uncompleted.count).to eq(6)
         expect{
-          xhr :post, :create, task: { name: "new_task"}
+          xhr :post, :create, task: { name: "new_task", user_id: @user.id}
         }.not_to change(Task, :count)
         expect(response.code).to eq("200")
       end

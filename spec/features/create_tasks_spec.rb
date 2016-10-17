@@ -16,7 +16,7 @@ feature "create tasks" do
 
   context "with 6 uncompleted tasks" do
     before(:each) do
-      6.times { create(:task) }
+      6.times { create(:task, user_id: @user.id) }
     end
     scenario "it doesn't create a new task", js: true do
       log_in_as(@user, password: "ABCDE123")
