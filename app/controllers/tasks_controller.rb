@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task = Task.destroy(params[:id])
-    @uncomplted_tasks_count = Task.uncompleted.count
+    @uncomplted_tasks_count = current_user.tasks.uncompleted.count
     respond_to do |format|
       format.js
     end
