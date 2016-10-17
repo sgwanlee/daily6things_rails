@@ -7,6 +7,7 @@ class TasksController < ApplicationController
       format.js {
         @uncompleted_tasks_count = current_user.tasks.uncompleted.count
         if @uncompleted_tasks_count < 6
+          task_params["priority"] = current_user.tasks.uncompleted.map(&:priority).min
           @task = Task.create!(task_params)
           @uncompleted_tasks_count += 1
           @result = :success
