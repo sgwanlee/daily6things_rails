@@ -21,8 +21,10 @@ $(document).on("turbolinks:load", function (){
 
   dragula.on('drop', function(el){
     console.log($(el).index('#incompleted-tasks form'))
-    var id = $(el).attr('id').slice(10,12)
+    var id = $(el).data('task-id');
     console.log(id)
+    // var id = $(el).attr('id').slice(10,12)
+    // console.log(id)
     $.ajax({
       url: '/tasks/'+id+'/replace',
       type: 'POST',

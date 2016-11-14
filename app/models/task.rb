@@ -24,7 +24,8 @@ class Task < ActiveRecord::Base
   end
 
   def set_priority_from_index(index)
-    tasks = Task.uncompleted
+    @user = User.find(self.user_id)
+    tasks = @user.tasks.uncompleted
     tasks.each_with_index do |task, i|
       if task == self
         next
