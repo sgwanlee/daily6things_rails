@@ -36,7 +36,7 @@ class TasksController < ApplicationController
           @result = :fail
           flash[:danger] = "You've already got 6 tasks today"
         end
-        @uncompleted_tasks_count = Task.uncompleted.count
+        @uncompleted_tasks_count = current_user.tasks.uncompleted.count
       }
     end
   end

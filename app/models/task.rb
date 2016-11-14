@@ -50,15 +50,16 @@ class Task < ActiveRecord::Base
   private
 
   def uncompleted_tasks_should_less_than_6
+    @user = User.find(user_id)
     if self.new_record?
-      if not Task.uncompleted.count <= 6
+      if not @user.tasks.uncompleted.count <= 6
         errors.add(:task_limit, "already 6 tasks")
         false
       end
     else
       if not self.completed?
-        if not Task.uncompleted.pluck(:id).include?(self.id)
-          if not Task.uncompleted.count < 6
+        if not @user.tasks.uncompleted.pluck(:id).include?(self.id)
+          if not @user.tasks.uncompleted.count < 6
             errors.add(:task_limit, "already 6 tasks")
             false
           end

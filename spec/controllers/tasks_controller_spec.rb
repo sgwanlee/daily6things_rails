@@ -8,9 +8,9 @@ RSpec.describe TasksController, type: :controller do
   describe "Post create" do
     context "uncompleted tasks < 6" do
       it "creates new task" do
-        expect(Task.uncompleted.count).to be < 6
+        expect(@user.tasks.uncompleted.count).to be < 6
         expect{
-          xhr :post, :create, task: { name: "new_task"}
+          xhr :post, :create, task: { name: "new_task", user_id: @user.id}
         }.to change(Task, :count).by(1)
         expect(response.code).to eq("200")
       end
@@ -74,11 +74,11 @@ RSpec.describe TasksController, type: :controller do
     end
     context "incompleted tasks == 6" do
       before(:each) do
-          @task = create(:task, complete: true, completed_at: Time.zone.now)
-          6.times do 
-            task = create(:task)
-          end
+        @task = create(:task, complete: true, completed_at: Time.zone.now, user_id: @user.id)
+        6.times do 
+          task = create(:task, user_id: @user.id)
         end
+      end
       context "update incompleted" do
         it "does not change .complete" do
           expect{
@@ -93,7 +93,7 @@ RSpec.describe TasksController, type: :controller do
       end
       context "update completed" do
         before(:each) do
-          @task = Task.uncompleted.first
+          @task = @user.tasks.uncompleted.first
         end
         it "changes complete" do
           expect{
